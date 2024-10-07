@@ -1,10 +1,7 @@
 import os
 import time
 import json
-import yaml
 from web3 import Web3
-from solcx import compile_source, install_solc
-import vyper
 import subprocess
 
 
@@ -16,8 +13,6 @@ V3_VAULT_ORIGINAL = '0xcA78AF7443f3F8FA0148b746Cb18FF67383CDF3f'
 RELEASE_DATA_FILE_PATH = "./release/release_data.json"
 config_file = "release_config.yaml"
 
-# Optionally install a specific Solidity compiler version (adjust if needed)
-install_solc('0.8.19')
 
 def main():
     release_name = "v3.0.3"
@@ -124,7 +119,7 @@ def get_foundry_artifacts(contract_name):
         if bytecode == '0x':
             return None, None
         abi = artifact.get('abi', [])
-        
+
     if bytecode:
         print(f"Bytecode for {contract_name}: {bytecode[:40]}...")  # Print a portion of the bytecode for brevity
     else:
